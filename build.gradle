@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 group 'org.gnacek'
@@ -31,15 +32,4 @@ jar {
                 'Main-Class': 'S3ObjectOperations'
         )
     }
-}
-
-task fatJar(type: Jar) {
-    manifest {
-        attributes(
-                'Main-Class': 'S3ObjectOperations'
-        )
-    }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
 }
